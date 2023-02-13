@@ -1,0 +1,7 @@
+# MVC Code First Car Insurance App
+
+ASP.NET application that uses MVC (Model-View-Controller) structure. Uses Code First and DAL context files to generate and initialize an SQL database with a couple of starting objects. User is able to add more objects to the database by filling out the `Create` form, and the program will calculate the `Quote` price based on the given info. The program will also re-calculate the `Quote` when editing an existing object through the web browser using the modified info. Also includes a basic `Admin` controller and view.
+
+## Running The Project
+
+Open the .sln file in Visual Studio 2019 or higher (you may need to use Visual Studio Installer to install the necessary components if your installation is missing any) and run the program. The program will use the context files stored in the `DAL` folder to generate a fresh SQL database inside the `App_Data` of the project directory and initialize it with starting objects. You can navigate to the `Applicants` view by clicking the `Applicants` item in the navbar. Same thing with the `Admin` view. You can instantiate new `Applicant` objects and add them to the database by clicking `Create New` on the `Applicants` view.
