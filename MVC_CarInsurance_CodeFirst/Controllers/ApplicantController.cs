@@ -18,6 +18,7 @@ namespace MVC_CarInsurance_CodeFirst.Controllers
         // GET: Applicant
         public ActionResult Index()
         {
+            //goes to the "Index.cshtml" view page with a list of Applicants in the database
             return View(db.Applicants.ToList());
         }
 
@@ -51,7 +52,9 @@ namespace MVC_CarInsurance_CodeFirst.Controllers
         {
             if (ModelState.IsValid)
             {
+                //adds the Applicant object named "applicant" with the info from the .cshtml form to the database
                 db.Applicants.Add(applicant);
+                //saves changes to the SQL database
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
