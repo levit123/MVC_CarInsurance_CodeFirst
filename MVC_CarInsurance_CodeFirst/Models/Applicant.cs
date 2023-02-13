@@ -21,64 +21,58 @@ namespace MVC_CarInsurance_CodeFirst.Models
         public float Quote { get; set; }
 
         /*generates an insurance quote based on applicants info*/
-        public float GenerateQuote(Applicant app)
+        //Method to calculate the value of the "Quote" property based on info the user inputted in the "Create.cshtml" form.
+        //This method will be called in the POST "Create" method, and will save it's returned value to the "Quote" property
+        //of the Applicant object used in that POST method. It will also be called when initializing the database
+        //with starting objects
+        public float CalculateQuote(Applicant applicant)
         {
-            float price = 50;
-            DateTime present = DateTime.Now;
+            //starts the Quote price at a base of 50 dollars
+            float result = 50;
 
-            /*if the applicant is under 25 but above 18, add 25 dollars to the monthly total*/
-            if ((present.Year - app.DateOfBirth.Year) < 25 && (present.Year - app.DateOfBirth.Year) > 18)
-            {
-                price += 25;
-            }
-            /*if the applicant is under 18, add 100 dollars to the monthly total*/
-            else if ((present.Year - app.DateOfBirth.Year) < 18)
-            {
-                price += 100;
-            }
+            //calculates the applicant's age in years by subtracting their year of birth from the current year
+            int age = DateTime.Now.Year - applicant.DateOfBirth.Year;
 
-            /*if the applicants car was made before 2000, add 25 dollars to the monthly total*/
-            if (app.CarYear < 2000)
+            //if the applicant is under 18, increase the quote price by 100 dollars
+            if (age < 18)
             {
-                price += 25;
+                result += 100;
             }
-            /*if the car was made after 2015, add 25 dollars*/
-            if (app.CarYear > 2015)
+            //otherwise, if the applicant is over 18 but under 25, increase the quote price by 50 dollars
+            else if (age >= 18 && age < 25)
             {
-                price += 25;
+                result += 50;
             }
 
-            /*if car is a Porsche, add 25 dollars*/
-            if (app.CarMake == "Porsche")
+            //if the applicant's car was manufactured before the year 2000, increase the quote price by 50 dollars
+            if (applicant.CarYear < 2000)
             {
-                price += 25;
-
-                /*if car is a Porsche and a 911 Carrera, add 25 dollars*/
-                if (app.CarModel == "911 Carrera")
-                {
-                    price += 25;
-                }
+                result += 50;
+            }
+            //otherwise, if the applicant's car was manufactured after the year 2015, increase the quote price by 25 dollars
+            else if (applicant.CarYear > 2015)
+            {
+                result += 25;
             }
 
-            /*add 10 dollars per speeding ticket*/
-            for (int i = 0; i < app.SpeedingTickets; i++)
+            //if the applicant has a DUI, increase the quote price by 50 percent
+            if (applicant.DUI == true)
             {
-                price += 10;
+                result *= 1.50f;
             }
 
-            /*if applicant has a DUI, add 25 percent of the current price to the total*/
-            if (app.DUI == true)
+            //if the applicant wants full coverage, increase the quote price by 25 percent
+            if (applicant.Coverage == true)
             {
-                price += (price / 4);
+                result *= 1.25f;
             }
 
-            /*if the applicant wants full coverage, add 50 percent of the current price to the total*/
-            if (app.Coverage == true)
-            {
-                price += (price / 2);
-            }
+            //increase the quote price by 10 dollars per speeding ticket they have. If they dont have any speeding tickets,
+            //it will not increase the price
+            result += applicant.SpeedingTickets * 10;
 
-            return price;
+            //return the calculate quote price
+            return result;
         }
 
         /*this is a Navigation Property, which holds related entities (in this case, the Quote entity)

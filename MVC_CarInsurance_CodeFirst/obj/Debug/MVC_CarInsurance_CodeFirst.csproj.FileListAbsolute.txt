@@ -94,3 +94,4 @@ D:\Github Repositories\MVC_CarInsurance_CodeFirst\MVC_CarInsurance_CodeFirst\obj
 D:\Github Repositories\MVC_CarInsurance_CodeFirst\MVC_CarInsurance_CodeFirst\obj\Debug\MVC_CarInsurance_CodeFirst.csproj.CopyComplete
 D:\Github Repositories\MVC_CarInsurance_CodeFirst\MVC_CarInsurance_CodeFirst\obj\Debug\MVC_CarInsurance_CodeFirst.dll
 D:\Github Repositories\MVC_CarInsurance_CodeFirst\MVC_CarInsurance_CodeFirst\obj\Debug\MVC_CarInsurance_CodeFirst.pdb
+D:\Github Repositories\MVC_CarInsurance_CodeFirst\MVC_CarInsurance_CodeFirst\obj\Debug\MVC_CarInsurance_CodeFirst.csproj.AssemblyReference.cache

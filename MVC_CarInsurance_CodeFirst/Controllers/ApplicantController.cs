@@ -52,6 +52,9 @@ namespace MVC_CarInsurance_CodeFirst.Controllers
         {
             if (ModelState.IsValid)
             {
+                //calls the function to calculate the Quote price, and saves the returned result
+                //to the "Quote" property of the Applicant object named "applicant"
+                applicant.Quote = applicant.CalculateQuote(applicant);
                 //adds the Applicant object named "applicant" with the info from the .cshtml form to the database
                 db.Applicants.Add(applicant);
                 //saves changes to the SQL database
@@ -86,6 +89,8 @@ namespace MVC_CarInsurance_CodeFirst.Controllers
         {
             if (ModelState.IsValid)
             {
+                //calls the function to re-calculate the Quote price based on the modified info
+                applicant.Quote = applicant.CalculateQuote(applicant);
                 db.Entry(applicant).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -127,5 +132,7 @@ namespace MVC_CarInsurance_CodeFirst.Controllers
             }
             base.Dispose(disposing);
         }
+
+        
     }
 }
